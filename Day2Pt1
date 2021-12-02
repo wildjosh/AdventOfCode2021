@@ -1,0 +1,32 @@
+$puzzleInput = @()
+$puzzleInput = Get-Content .\puzzleinput.txt
+$forward = 0
+$depth = 0
+
+foreach ($line in $puzzleInput) {
+
+    $lineSplit = $line.Split(" ")
+    [string]$movementType = $lineSplit[0]
+    [int]$movementValue = $lineSplit[1]
+
+    if ([string]$movementType -eq "forward") {
+        echo "Moving FORWARD by $movementValue"
+        [int]$forward += $movementValue
+    }
+    elseif ([string]$movementType -eq "up") {
+        echo "Moving UP by $movementValue"
+        [int]$depth -= $movementValue
+    }
+    elseif ([string]$movementType -eq "down") {
+        echo "Moving DOWN by $movementValue"
+        [int]$depth += $movementValue
+    }
+
+    echo $forward
+    echo $depth
+}
+
+Write-Host $forward
+Write-Host $depth
+[int]$result = [int]$forward * [int]$depth
+Write-Host $result
